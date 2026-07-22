@@ -1,5 +1,5 @@
 ---
-name: AI Safe Reporting Tool
+name: ai-safe-reporting-tool
 description: "Use when building, integrating, debugging, or reviewing an AI-powered reporting, dashboard, or data-visualization application where AI generates report structure. Covers secure AIRspec report generation, validation, viewer-authorized server-side data execution, trusted rendering, interactions, responsive AIRMark charts, React integration, and conformance testing. Doesn't apply to ordinary dashboards or charts that do not use AI-generated report definitions."
 ---
 
