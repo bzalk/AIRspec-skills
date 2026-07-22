@@ -5,7 +5,7 @@ description: "Use when building, integrating, debugging, or reviewing an AIRspec
 
 # Build an AIRspec host
 
-Implement AIRspec as a complete Host boundary, not merely a chart component. Treat the current [AIRspec repository](https://github.com/bzalk/AIRspec) as normative and the [AIRMark Engine repository](https://github.com/bzalk/airmark-engine) as an optional reference implementation.
+Implement AIRspec as a complete Host boundary, not merely a chart component. Treat the current [AIRspec repository](https://github.com/bzalk/AIRspec) as normative. For JavaScript and TypeScript hosts, use the published packages from the [AIRMark Engine repository](https://github.com/bzalk/airmark-engine) by default; do not rebuild chart layout or scene-graph logic unless the target platform cannot use them or the project explicitly requires a custom implementation.
 
 ## Select the implementation path
 
@@ -108,7 +108,7 @@ Never turn document values into component names, modules, HTML, class names, or 
 
 ## Render AIRMark at exact pixels
 
-For JavaScript or TypeScript, prefer compatible current releases of:
+For JavaScript or TypeScript, use compatible current releases of:
 
 ```text
 @airspec/airmark-engine
@@ -116,7 +116,9 @@ For JavaScript or TypeScript, prefer compatible current releases of:
 @airspec/airmark-svg
 ```
 
-For other languages, implement the AIRMark Scene Graph contract and golden fixtures.
+Use `@airspec/airmark-engine` for deterministic layout, the framework adapter that matches the host, and `@airspec/airmark-svg` for SVG output or export. Do not duplicate scale, axis, mark, tooltip, or scene-graph behavior in host components. Build a custom adapter only when an existing adapter cannot target the required rendering platform.
+
+For other languages, implement the AIRMark Scene Graph contract and verify it against the upstream golden fixtures.
 
 Always use:
 
