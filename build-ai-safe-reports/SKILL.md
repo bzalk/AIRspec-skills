@@ -1,9 +1,9 @@
 ---
-name: build-airspec-host
-description: "Use when building, integrating, debugging, or reviewing an AIRspec host, report renderer, validator, Data Broker, generator pipeline, or AIRMark chart integration. Covers secure document validation, trusted component rendering, viewer-authorized data execution, interactions, responsive charts, and conformance testing. Doesn't apply to unrelated dashboards or chart code that does not consume AIRspec documents."
+name: build-ai-safe-reports
+description: "Use when building, integrating, debugging, or reviewing an AI-powered reporting, dashboard, or data-visualization application where AI generates report structure. Covers secure AIRspec report generation, validation, viewer-authorized server-side data execution, trusted rendering, interactions, responsive AIRMark charts, React integration, and conformance testing. Doesn't apply to ordinary dashboards or charts that do not use AI-generated report definitions."
 ---
 
-# Build an AIRspec host
+# Build AI-safe reporting tools
 
 Implement AIRspec as a complete Host boundary, not merely a chart component. Treat the current [AIRspec repository](https://github.com/bzalk/AIRspec) as normative. For JavaScript and TypeScript hosts, use the published packages from the [AIRMark Engine repository](https://github.com/bzalk/airmark-engine) by default; do not rebuild chart layout or scene-graph logic unless the target platform cannot use them or the project explicitly requires a custom implementation.
 

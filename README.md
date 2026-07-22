@@ -4,22 +4,22 @@ Reusable AI-agent skills for implementing [AIRspec](https://github.com/bzalk/AIR
 
 ## Available skill
 
-### `build-airspec-host`
+### AI Safe Reporting Tool (`build-ai-safe-reports`)
 
-Build, integrate, debug, or review a secure AIRspec Host: validation, the server-side Data Broker, trusted components, AIRMark rendering, interactions, generator integration, and conformance testing.
+Build AI-powered reports and dashboards without giving the AI direct access to application data, credentials, queries, or execution. The skill guides Bolt through secure AIRspec report generation, validation, the server-side Data Broker, trusted components, AIRMark rendering, React integration, interactions, and conformance testing.
 
 ## Import into Bolt
 
 1. Open Bolt's **Skills library** or a project's **Settings → Skills**.
 2. Select **Add skill → From GitHub**.
 3. Enter this repository URL.
-4. Select `build-airspec-host` as the skill folder.
+4. Select `build-ai-safe-reports` as the skill folder.
 5. Create the skill and enable it for the project if necessary.
 
 Bolt can apply the skill automatically when a request matches its description, or manually with:
 
 ```text
-/$build-airspec-host
+/$build-ai-safe-reports
 ```
 
 Read every imported `SKILL.md` before enabling it. This repository's skill contains no credentials, external tool permissions, or instructions to transmit application data.
