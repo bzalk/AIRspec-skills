@@ -13,6 +13,8 @@ Inspect the existing project before changing code.
 
 - For React, read [references/react.md](references/react.md).
 - For every other framework, platform, or language, read [references/generic.md](references/generic.md).
+- When implementing requirements chat or AI document generation, read [references/chat-generation.md](references/chat-generation.md).
+- When the project uses Supabase, read [references/supabase.md](references/supabase.md).
 - Always follow [references/conformance.md](references/conformance.md).
 
 Do not create a parallel application when the project already has routing, authentication, state, API, design-system, or test conventions.
