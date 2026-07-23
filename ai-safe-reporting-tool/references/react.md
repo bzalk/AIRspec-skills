@@ -60,7 +60,7 @@ Avoid one state variable per component and request effects that can loop. Prefer
 
 ## Chart component
 
-Install and use `@airspec/airmark-engine` with `@airspec/airmark-react`; do not implement chart geometry, scales, axes, marks, or tooltip formatting in React components. Use `AirmarkChartAuto` inside report grid cells:
+Install `@airspec/airmark-engine` and `@airspec/airmark-react` from npm with the project's package manager; do not implement chart geometry, scales, axes, marks, or tooltip formatting in React components. Use `AirmarkChartAuto` inside report grid cells:
 
 ```tsx
 <AirmarkChartAuto

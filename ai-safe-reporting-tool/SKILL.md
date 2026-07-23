@@ -31,6 +31,7 @@ data_sources: ""
 authentication_and_authorization: ""
 registered_routes: ""
 target_conformance_class: "A | AV | AVI"
+minimum_generated_airspec_version: "1.1"
 first_source: ""
 first_report: ""
 test_typecheck_lint_build_commands: ""
@@ -70,7 +71,7 @@ Implement in this order:
 
 Return machine-readable errors containing `layer`, `code`, `path`, `message`, and an optional `suggestion`.
 
-- Layer 1: select the versioned Draft 2020-12 JSON Schema from `document.airspec`.
+- Layer 1: for stored documents, select the supported versioned Draft 2020-12 JSON Schema from `document.airspec`; for newly generated documents, require the deployment's resolved generation schema and version.
 - Layer 2: validate IDs, references, sources, fields, operators, aliases, stable outputs, bindings, derived fields, calculated metrics, components, selections, interactions, and routes.
 - Layer 3: apply viewer source/field/classification/limit policy, including derived-field classification roll-up.
 - Layer 4: enforce AIRMark's closed vocabulary, Dataset output fields, URL/expression prohibition, and complexity limits.
@@ -110,15 +111,15 @@ Never turn document values into component names, modules, HTML, class names, or 
 
 ## Render AIRMark at exact pixels
 
-For JavaScript or TypeScript, use compatible current releases of:
+For JavaScript or TypeScript, install compatible current releases from the public npm registry with the project's package manager:
 
-```text
-@airspec/airmark-engine
-@airspec/airmark-react
-@airspec/airmark-svg
+```bash
+npm install @airspec/airmark-engine
+npm install @airspec/airmark-react       # React hosts
+npm install @airspec/airmark-svg         # SVG output or export
 ```
 
-Use `@airspec/airmark-engine` for deterministic layout, the framework adapter that matches the host, and `@airspec/airmark-svg` for SVG output or export. Do not duplicate scale, axis, mark, tooltip, or scene-graph behavior in host components. Build a custom adapter only when an existing adapter cannot target the required rendering platform.
+Use the equivalent command for pnpm, Yarn, Bun, or the project's established package manager. Use the npm package `@airspec/airmark-engine` for deterministic layout, the framework adapter that matches the host, and `@airspec/airmark-svg` for SVG output or export. Do not replace these packages with copied source, a Git dependency, or host-specific chart geometry unless the project explicitly requires it. Build a custom adapter only when an existing adapter cannot target the required rendering platform.
 
 For other languages, implement the AIRMark Scene Graph contract and verify it against the upstream golden fixtures.
 
@@ -131,9 +132,22 @@ validated graphic + complete alias-keyed rows + measured content box + resolved 
 
 Layout pixels must equal display pixels. Measure the real content box and re-layout on resize. Never CSS-stretch an SVG calculated at another size. Display preformatted `meta.tooltip` entries without reformatting them. Dispatch selections through declared AIRspec interactions only.
 
+## Resolve and lock the generation version
+
+Resolve the current AIRspec generation version during implementation, dependency updates, or deployment—not independently inside each generation request:
+
+1. Read `AIRspec.md` from the default branch of the normative AIRspec repository.
+2. Extract its current **Schema ID convention** URL and fetch that versioned schema.
+3. Read the schema's `properties.airspec.const`; treat that value as the current document version.
+4. Verify the resolved version is at least `1.1`. Stop the update if it is older, unavailable, or internally inconsistent with the schema `$id`.
+5. Store the resolved version, schema URL, and schema content hash in deployment configuration or a checked dependency lock artifact.
+6. Refresh this lock deliberately when adopting a newer AIRspec release.
+
+Use the locked schema and version for every newly generated document, prompt, structured-output constraint, example, retry, and generation gate. The AI does not select its AIRspec version. Reject a generated candidate whose `airspec` value differs from the locked generation version, even when an older schema remains supported for reading existing documents.
+
 ## Integrate the generator last
 
-Provide the versioned schema, Source Catalog, Host limits, concise vocabulary guidance, and valid examples. Prefer constrained structured output when available. Validate the result, return machine-readable errors, and retry with a strict cap.
+Provide the locked generation schema and version, Source Catalog, Host limits, concise vocabulary guidance, and examples validated against that same schema. Prefer constrained structured output when available. Validate the result against the locked schema, return machine-readable errors, and retry with a strict cap.
 
 Require the generator to use:
 

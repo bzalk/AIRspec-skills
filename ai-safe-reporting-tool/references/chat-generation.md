@@ -53,7 +53,7 @@ Ask one to three useful questions at a time. Preserve exact logical source and f
 
 Run document generation behind a server endpoint or serverless function. Give it:
 
-- the current versioned AIRspec JSON Schema;
+- the deployment's resolved and locked current AIRspec JSON Schema and document version;
 - the viewer-appropriate Source Catalog;
 - Host limits and supported conformance class;
 - concise AIRMark vocabulary guidance;
@@ -62,6 +62,8 @@ Run document generation behind a server endpoint or serverless function. Give it
 - the current validated document when editing an existing report.
 
 Prefer provider-supported structured output constrained by the schema. Treat generated output as untrusted until it passes all applicable validation layers.
+
+Require the candidate's `airspec` value to equal the locked generation version. Enforce a minimum generated version of `1.1`, while allowing the Host to maintain a separate compatibility policy for previously stored documents. Keep every generation example on the locked version so examples cannot teach the model to downgrade.
 
 ## Validate and retry
 
